@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/v1/tasks")
 public class TaskController {
     private final TaskRepository repository;
 

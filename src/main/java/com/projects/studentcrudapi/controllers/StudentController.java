@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/api/v1/students")
 @CrossOrigin
 @RequiredArgsConstructor
 public class StudentController {
