@@ -2,6 +2,8 @@ package com.projects.studentcrudapi.dtos;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotBlank;
+
 import com.projects.studentcrudapi.entities.Student;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentDto {
     private long id;
+    @NotBlank(message = "Student name is required")
     private String name;
     private String address;
     private LocalDateTime createdAt;

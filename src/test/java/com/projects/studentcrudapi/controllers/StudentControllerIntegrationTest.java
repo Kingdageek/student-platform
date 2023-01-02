@@ -19,42 +19,44 @@ import com.projects.studentcrudapi.entities.Student;
 import com.projects.studentcrudapi.services.StudentService;
 
 @WebMvcTest(StudentController.class)
-public class StudentControllerUnitTest {
+public class StudentControllerIntegrationTest {
+    // This boots up the framework -> integration
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
     private StudentService studentService;
 
-    @Test
-    public void shouldCreateStudent() throws Exception {
-        mockMvc.perform(post("/students")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"Nonso\", \"address\": \"Johann fleck strasse\"}"))
-                .andExpect(status().isCreated());
-        // .andExpect(jsonPath("$.id").isNotEmpty())
-        // .andExpect(jsonPath("$.name").value("Nonso"))
-        // .andExpect(jsonPath("address").value("Johann fleck strasse"))
-        // .andExpect(jsonPath("$.created_at").isNotEmpty())
-        // .andExpect(jsonPath("$.updated_at").isNotEmpty());
-    }
+    // @Test
+    // public void shouldCreateStudent() throws Exception {
+    // mockMvc.perform(post("/api/v1/students")
+    // .contentType(MediaType.APPLICATION_JSON)
+    // .content("{\"name\": \"Stu Dent\", \"address\": \"Dorm 1\"}"))
+    // .andExpect(status().isCreated());
+    // // .andExpect(jsonPath("$.id").isNotEmpty())
+    // // .andExpect(jsonPath("$.created_at").isNotEmpty())
+    // // .andExpect(jsonPath("$.updated_at").isNotEmpty());
+    // }
 
     @Test
     public void verify_createStudentSerialization() throws Exception {
-        StudentDto student = new StudentDto(1L, "Nonso", "Johann fleck strasse", LocalDateTime.now(), LocalDateTime.now());
+        StudentDto student = StudentDto.builder()
+                .name("Stu Dent")
+                .address("Dorm 1")
+                .build();
         Student savedStudent = student.toEntity();
         savedStudent.setId(student.getId());
-        savedStudent.setCreatedAt(student.getCreatedAt());
-        savedStudent.setUpdatedAt(student.getUpdatedAt());
+        savedStudent.setCreatedAt(LocalDateTime.now());
+        savedStudent.setUpdatedAt(LocalDateTime.now());
         when(studentService.createStudent(student)).thenReturn(savedStudent);
 
-        mockMvc.perform(post("/students").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\": \"Nonso\", \"address\": \"Johann fleck strasse\"}"))
+        mockMvc.perform(post("/api/v1/students").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\": \"Stu Dent\", \"address\": \"Dorm 1\"}"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").isNotEmpty())
-                .andExpect(jsonPath("$.name").value("Nonso"))
-                .andExpect(jsonPath("address").value("Johann fleck strasse"))
-                .andExpect(jsonPath("$.created_at").isNotEmpty())
-                .andExpect(jsonPath("$.updated_at").isNotEmpty());
+                .andExpect(jsonPath("$.name").value("Stu Dent"))
+                .andExpect(jsonPath("address").value("Dorm 1"))
+                .andExpect(jsonPath("$.createdAt").isNotEmpty())
+                .andExpect(jsonPath("$.updatedAt").isNotEmpty());
     }
 }

@@ -16,6 +16,6 @@ public enum TaskStatus {
     }
 
     public static TaskStatus get(String status) {
-        return STATUS_MAP.get(status.toUpperCase().trim());
+        return STATUS_MAP.get(status.toUpperCase().trim()); 
     }
 }

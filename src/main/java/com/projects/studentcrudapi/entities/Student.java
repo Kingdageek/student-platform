@@ -13,13 +13,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import com.projects.studentcrudapi.dtos.StudentDto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "students")
-@RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

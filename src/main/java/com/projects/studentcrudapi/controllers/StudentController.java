@@ -21,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/v1/students")
 @CrossOrigin
@@ -47,13 +49,14 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto student) {
+    public ResponseEntity<StudentDto> createStudent(@Valid @RequestBody StudentDto student) {
         Student createdStudent = studentService.createStudent(student);
         return new ResponseEntity<>(createdStudent.toDto(), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentDto> updateStudent(@RequestBody StudentDto student, @PathVariable("id") long id) {
+    public ResponseEntity<StudentDto> updateStudent(@Valid @RequestBody StudentDto student,
+            @PathVariable("id") long id) {
         Student prevStudent = studentService.getStudent(id);
         if (prevStudent == null) {
             return ResponseEntity.badRequest().build();

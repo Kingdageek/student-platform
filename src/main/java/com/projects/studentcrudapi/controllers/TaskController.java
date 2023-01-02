@@ -87,4 +87,16 @@ public class TaskController {
         return ResponseEntity.ok().body(tasks);
     }
 
+    // @GetMapping("/download")
+    // public ResponseEntity<InputStreamResource> downloadFile() throws IOException {
+    //     File file = new File("/path/to/file.txt");
+    //     InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+    //     return ResponseEntity.ok()
+    //             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+    //             .contentType(MediaType.APPLICATION_OCTET_STREAM)
+    //             .contentLength(file.length())
+    //             .body(resource);
+    // }
+
 }

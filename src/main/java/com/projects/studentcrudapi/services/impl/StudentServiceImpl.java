@@ -3,19 +3,21 @@ package com.projects.studentcrudapi.services.impl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projects.studentcrudapi.dtos.StudentDto;
 import com.projects.studentcrudapi.entities.Student;
 import com.projects.studentcrudapi.services.StudentService;
+
+import lombok.RequiredArgsConstructor;
+
 import com.projects.studentcrudapi.repositories.StudentRepository;
 
 @Service
+@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     @Override
     public List<Student> getAllStudents() {
